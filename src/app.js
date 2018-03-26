@@ -13,6 +13,11 @@ router.get("/" (ctx, next) => {
 });
 
 
+// User
+// Login
+// Session
+
+
 // Pay methods
 // Pay
 // Get Payment history
