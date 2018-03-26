@@ -1,0 +1,9 @@
+{
+  "name": "Kqash api",
+  "version": "0.0.1",
+  "dependencies": {
+    "koa": "^2.5.0",
+    "koa-detour": "^2.2.0",
+    "response-objects": "^1.2.2"
+  }
+}
