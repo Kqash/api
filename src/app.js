@@ -1,17 +1,25 @@
 const Koa = require("koa");
-const Detour = require("koa-detour")
-const R = require("response-objects");
+const Router = require("koa-router")
 
 const app = new Koa();
-const router = new Detour();
+const router = new Router();
 
-app.use(router.middleware());
 
 // Status check
-router.route("/", {
-  GET (ctx) {
-    return R.Ok()
-  },
+router.get("/" (ctx, next) => {
+  // Extract boilerplate?
+  ctx.body = "ok";
+  next();
 });
+
+
+// Pay methods
+// Pay
+// Get Payment history
+// Send to Queue
+
+app
+  .use(router.routes());
+  .use(router.allowedMethods());
 
 app.listen(8000);
