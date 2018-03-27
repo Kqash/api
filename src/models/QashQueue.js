@@ -21,6 +21,10 @@ function addToQueue(amount) {
   return fullCredits;
 }
 
+function length() {
+  return queue.length;
+}
+
 function drainQueue() {
   let credits = 0;
   while(queue.length) {
