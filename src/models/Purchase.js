@@ -5,7 +5,6 @@ const secretKey = "sk_test_rbqdgOEazEqu1Q68AcSEFptv";
 const publishableKey = "pk_test_lNd0J3OTyTy1ecIjgc6gd8yb";
 const stripe = require("stripe")(secretKey);
 
-
 async function create (token, amount, uuid) {
   if (!uuid) {
     throw new Error("Unique id required for safety");
@@ -25,6 +24,24 @@ async function create (token, amount, uuid) {
   return charge;
 }
 
+async function getSingleCharge(chargeId) {
+  const retrieveCharge = Promise.promisify(stripe.charges.retreive);
+  const charge = await retrieveCharge({ charge: chargeId })
+  return charge;
+}
+
+async function getChargesForCustomerId(customerId, pageId)  {
+  const options = {
+    customer: customerId,
+  };
+  if (pageId) {
+    options.ending_before = pageId;
+  }
+  return stripe.charges.list(options);
+}
+
 module.exports = {
   create,
+  getSingleCharge,
+  getChargesForCustomerId,
 }

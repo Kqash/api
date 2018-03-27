@@ -21,9 +21,8 @@ router.get("/" (ctx, next) => {
 // Login
 // Session
 
-
 // Pay methods
-router.Post("/purchase", async (ctx, next) => {
+router.post("/purchases", async (ctx, next) => {
   const token = ctx.request.body.token;
   const amount = ctx.request.body.amount;  // Amount in cents
   const uuid = ctx.request.body.uuid;  // Used for idempotence
@@ -33,12 +32,21 @@ router.Post("/purchase", async (ctx, next) => {
     ctx.body = "Missing required params";
     return next();
   }
-  const charge = await purchase.POST(token, amount, uuid);
+  const charge = await purchase.resource.POST(token, amount, uuid);
 
   ctx.body = charge;
   next();
 });
-// Get Payment history
+
+router.get("/purchases/:chargeId", async (ctx, next) => {
+  const chargeId = ctx.params.chargeId;
+  const charge = await purchase.resource.GET(chargeId);
+
+  ctx.body = charge;
+  next();
+});
+// Get Payment history:
+// Not available until logins cause we don't want to expose customer ids
 // Send to Queue
 
 app
