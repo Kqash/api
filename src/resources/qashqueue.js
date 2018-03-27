@@ -1,11 +1,11 @@
 const QashQueue = require("./models/QashQueue");
 
 function GET() {
-  return QashQueue.length();
+  return QashQueue.pendingAmount();
 }
 
 function PATCH() {
-  return QashQueue.drainQueue();
+  return QuashQueue.drainQueue();
 }
 
 modules.export = {

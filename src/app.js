@@ -4,6 +4,7 @@ const bodyParser = require("koa-bodyparser");
 
 // Resources
 const purchase = require("./resources/purchase");
+const qashqueue = require("./resources/qashqueue");
 
 const app = new Koa();
 const router = new Router();
@@ -48,8 +49,16 @@ router.get("/purchases/:chargeId", async (ctx, next) => {
 // Get Payment history:
 // Not available until logins cause we don't want to expose customer ids
 
-
 // Send to Queue
+router.get("/qash", (ctx, next) => {
+  ctx.body = qashqueue.GET();
+  next();
+});
+
+router.patch("/qash", (ctx, next) => {
+  ctx.body = qashqueue.PATCH();
+  next();
+});
 
 app
   .use(bodyParser())

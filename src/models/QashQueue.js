@@ -21,8 +21,15 @@ function addToQueue(amount) {
   return fullCredits;
 }
 
-function length() {
-  return queue.length;
+function pendingAmount() {
+  let credits = 0;
+  for (let i = 0; i < queue.length; i++) {
+    credits += queue[i];
+  }
+  return {
+    credits,
+    remainder,
+  };
 }
 
 function drainQueue() {
@@ -30,10 +37,13 @@ function drainQueue() {
   while(queue.length) {
     credits += queue.pop();
   }
-  return credits;
+  return {
+    credits,
+  }
 }
 
 module.exports = {
   addToQueue,
+  pendingAmount,
   drainQueue,
 }
