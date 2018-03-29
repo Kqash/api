@@ -10,10 +10,8 @@ async function create (token, amount, uuid) {
     throw new Error("Unique id required for safety");
   }
 
-  createCharge = Promise.promisify(stripe.charges.create);
-  // Take USD for now
-  // Will automatically throw the error if we get one
-  const charge = await createCharge({
+  const createCharge = Promise.promisify(stripe.charges.create);
+  const charge = await stripe.charges.create({
     amount: amount,
     currency: "usd",
     source: token,
@@ -21,12 +19,13 @@ async function create (token, amount, uuid) {
   }, {
     idempotency_key: uuid,
   });
+  // Take USD for now
+  // Will automatically throw the error if we get one
   return charge;
 }
 
 async function getSingleCharge(chargeId) {
-  const retrieveCharge = Promise.promisify(stripe.charges.retreive);
-  const charge = await retrieveCharge({ charge: chargeId })
+  const charge = await stripe.charges.retreive({ charge: chargeId })
   return charge;
 }
 
@@ -37,7 +36,8 @@ async function getChargesForCustomerId(customerId, pageId)  {
   if (pageId) {
     options.ending_before = pageId;
   }
-  return stripe.charges.list(options);
+  const charges = await stripe.charges.list(options);
+  return charges;
 }
 
 module.exports = {
