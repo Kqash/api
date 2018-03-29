@@ -1,4 +1,3 @@
-const Promise = require("bluebird");
 
 // Note these are dev keys
 const secretKey = "sk_test_rbqdgOEazEqu1Q68AcSEFptv";

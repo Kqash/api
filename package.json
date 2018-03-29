@@ -2,7 +2,6 @@
   "name": "Kqash api",
   "version": "0.0.1",
   "dependencies": {
-    "bluebird": "^3.5.1",
     "install": "^0.11.0",
     "koa": "^2.5.0",
     "koa-bodyparser": "^4.2.0",
