@@ -1,5 +1,5 @@
-const Purchase = require("./models/Purchase");
-const QashQueue = require("./models/QashQueue");
+const Purchase = require("../models/Purchase");
+const QashQueue = require("../models/QashQueue");
 
 const resource = {
   async POST (token, amount, uuid) {

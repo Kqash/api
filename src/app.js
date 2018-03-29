@@ -11,7 +11,7 @@ const router = new Router();
 
 
 // Status check
-router.get("/" (ctx, next) => {
+router.get("/", (ctx, next) => {
   // Extract boilerplate?
   ctx.body = "ok";
   next();
@@ -62,7 +62,8 @@ router.patch("/qash", (ctx, next) => {
 
 app
   .use(bodyParser())
-  .use(router.routes());
+  .use(router.routes())
   .use(router.allowedMethods());
 
+console.log("Starting app on 8000")
 app.listen(8000);
